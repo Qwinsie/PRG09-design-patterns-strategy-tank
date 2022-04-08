@@ -3,6 +3,11 @@ import { Game }             from "./game.js";
 import { GameObject }       from "./gameobject.js";
 import { Turret }           from "./turret.js";
 import { Vector }           from "./vector.js";
+import { Projectile } from "./projectiles/projectile.js";
+import { BulletAmmo }       from "./ammo/bulletammo.js";
+import { MissileAmmo }      from "./ammo/missileammo.js";
+import { RocketAmmo }       from "./ammo/rocketammo.js";
+import { Ammunition } from "./ammo/ammunition.js";
 
 export class Tank extends GameObject{
     private readonly FRICTION       : number    = 0.3  
@@ -17,6 +22,7 @@ export class Tank extends GameObject{
     private rotationSpeed   : number    = 2
     private turret          : Turret
     private game            : Game
+    private projectile      : Projectile
     
     protected speed         : Vector    = new Vector(0, 0)
 
@@ -95,12 +101,22 @@ export class Tank extends GameObject{
     }
 
     private fire() {
-        this.game.gameObjects.push(new Bullet(this))
+        this.game.gameObjects.push(new Bullet(this)) /// TO DO Bullet needs to be current projectile
         console.log("fire")
     }
 
+
     onCollision(target: GameObject): void {
-        // throw new Error("Method not implemented.");
+        if(target instanceof Ammunition) 
+        {
+            // throw new Error("Method not implemented."); 
+            let index = this.game.gameObjects.indexOf(target)
+            if(index > -1) { 
+                this.game.gameObjects.splice(index,1)
+            }
+            console.log(target);
+            
+        }
     }
 
     private keepInWindow() {

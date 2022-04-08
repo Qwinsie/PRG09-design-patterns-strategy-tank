@@ -7,11 +7,12 @@ import { RocketAmmo }   from "./ammo/rocketammo.js"
 import { MissileAmmo }  from "./ammo/missileammo.js"
 
 export class Game {
-
+    
     // Fields 
     public gameObjects: GameObject[] = []
 
     constructor() {
+        console.log("Game is starting!")
         this.gameObjects.push(new BulletAmmo(new Vector(800, 200)))
         this.gameObjects.push(new RocketAmmo(new Vector(500, 200)))
         this.gameObjects.push(new MissileAmmo(new Vector(500, 500)))
@@ -32,6 +33,8 @@ export class Game {
 
             this.checkCollision(gameObject)
         }
+        console.log(this.gameObjects);
+        
 
         requestAnimationFrame(() => this.gameLoop())
     }

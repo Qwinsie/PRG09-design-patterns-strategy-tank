@@ -6,6 +6,7 @@ export abstract class Ammunition extends GameObject{
         super(type)
 
         this.position = position
+        this.div = this.div
     }
 
     abstract onCollision(target: GameObject): void
